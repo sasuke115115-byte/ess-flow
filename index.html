@@ -529,7 +529,7 @@ const printBtn=document.getElementById("printBtn"), openLink=document.getElement
 const framed=(()=>{try{return window.self!==window.top}catch(e){return true}})();
 // PRINT_URL：枠の外で単独に開ける置き場所（決まったら入れる）。空のうちは、押すと手元のファイルを案内する
 // （試した結果：枠の中の自分の住所を新しいタブで開いても、表示されなかった。2026-11-15）
-const PRINT_URL="";
+const PRINT_URL="https://sasuke115115-byte.github.io/ess-flow/";   // GitHub Pages（誰でも開ける）。直したら tools/publish-pages.sh で送る
 if(framed && PRINT_URL){
   printBtn.hidden=true;
   openLink.href=PRINT_URL+"#print";

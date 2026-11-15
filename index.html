@@ -156,7 +156,7 @@ td:first-child{font-weight:700;white-space:nowrap}
 .check input:checked ~ .t{color:var(--muted);text-decoration:line-through}
 .foot{margin-top:28px;font-size:13px;color:var(--muted)}
 
-@media (max-width:760px){
+@media screen and (max-width:760px){   /* screen に限る：A4 の印刷幅（約700px）でスマホの形にならないように */
   .grid3,.timeline{grid-template-columns:1fr}
   .stages{grid-template-columns:1fr 1fr}
   .stage:nth-child(2){border-right:0}
@@ -176,18 +176,118 @@ td:first-child{font-weight:700;white-space:nowrap}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 
-/* A4 の印刷：2つのタブを両方出し、セクションごとに改ページ */
-@page{size:A4;margin:12mm}
+/* ===== A4 の印刷 =====
+   紙の割り付け（.pb の所で改ページ）
+     1枚目：表紙・売る物3つ・しくみ
+     2枚目：人・服・お金の流れ・媒体の役割
+     3枚目：申し込みの流れ・役割
+     4枚目：収益の枠組み・始める順
+     5枚目〜：やることリスト（チェック欄つき）
+   文字は pt、余白は mm で決める。画面の見た目は変えない */
+@page{size:A4;margin:12mm 12mm 14mm;
+  @bottom-left{content:"East Side Story 事業フロー";font:7.5pt "Zen Kaku Gothic New",sans-serif;color:#5A6275}
+  @bottom-right{content:counter(page) " / " counter(pages);font:7.5pt "DM Mono",monospace;color:#5A6275}}
 @media print{
-  :root{--bg:#fff;--paper:#fff}
-  body{font-size:11pt;background:#fff}
-  .tabs,.print-note{display:none}
+  /* 紙はいつも明るい色。暗い表示で見ていても同じに出す */
+  :root,:root:not([data-theme="light"]),:root[data-theme="dark"]{
+    --bg:#F3F4F6;--paper:#fff;--ink:#1B2233;--muted:#4F5768;--denim:#2F4A7A;--denim-soft:#E2E8F2;
+    --leather:#9A5B2C;--leather-soft:#F3E7DC;--thread:#C9A15A;--line:#CDD3DD;--mid1:#5A6A86;--mid2:#91866A;
+    --ok:#2E7D5B;--ok-soft:#E0F0E7;color-scheme:light}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}   /* 表紙の色・印を紙にも出す */
+  html,body{background:#fff}
+  body{font-size:9.5pt;line-height:1.55}
+  .wrap{max-width:none;padding:0}
+  .tabs,.print-note,.progress,.screen-only{display:none!important}   /* 画面だけで要る物を消す（中身の文は消さない） */
   [role="tabpanel"][hidden]{display:block!important}
-  .patch{box-shadow:none;break-inside:avoid;page-break-inside:avoid;margin-top:0;margin-bottom:8mm}
-  .patch.pb{break-before:page;page-break-before:always}
-  .cover{-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  .flowmap svg{min-width:0}
-  table{min-width:0}
+
+  /* 布（セクション） */
+  .patch{box-shadow:none;border-radius:2px;padding:6mm 7mm;margin:0 0 4.5mm;break-inside:avoid}
+  .patch::before{inset:1.6mm;border-width:1px}
+  .patch.pb{break-before:page}
+  .eyebrow{font-size:6.5pt;margin-bottom:1.2mm}
+  .patch h2{font-size:14.5pt;margin-bottom:1.6mm}
+  .lead{font-size:9pt;max-width:none}
+  .tag{font-size:7pt;padding:.3mm 2mm}
+
+  /* 表紙：帯の高さにおさえる */
+  .cover{padding:9mm 10mm}
+  .cover h1{font-size:24pt;line-height:1.25}
+  .cover .catch{font-size:13pt;margin-top:3mm}
+  .cover .meta{margin-top:4mm;font-size:8pt;gap:1mm 6mm}
+
+  /* 売る物3つ */
+  .grid3{gap:3.5mm;margin-top:4mm}
+  .item{padding:3.5mm;gap:1.6mm}
+  .item h3{font-size:11.5pt}
+  .item p{font-size:8.8pt}
+  .item dl{font-size:7.9pt;gap:.6mm 2mm}
+  .item .key{font-size:7.5pt}
+
+  /* しくみ */
+  .cycle{gap:2.5mm;margin-top:4mm}
+  .node{padding:3mm}
+  .node .big{font-size:19pt}
+  .node .big[style]{font-size:13pt!important}
+  .node small{font-size:7.8pt}
+  .arrow{font-size:14pt}
+  .split{gap:4mm;margin-top:3mm}
+  .split p{font-size:8.6pt!important}
+
+  /* 流れ図：紙の幅いっぱい */
+  .flowmap{overflow:visible;margin-top:3mm}
+  .flowmap svg{min-width:0;width:100%}
+
+  /* 媒体の役割 */
+  .stages{margin-top:4mm}
+  .stage{padding:3mm}
+  .stage h3{font-size:11pt;margin:.5mm 0 1.6mm}
+  .chip{font-size:7.5pt;padding:.3mm 1.8mm;margin:0 1mm 1.2mm 0}
+  .stage p{font-size:8.3pt}
+
+  /* 申し込みの流れ */
+  .steps{margin-top:3mm}
+  .steps li{grid-template-columns:8mm 1fr auto;gap:3mm;padding:2mm 0}
+  .steps li::before{width:6mm;height:6mm;font-size:8pt;border-width:1px}
+  .steps b{font-size:9.3pt}
+  .steps .note{font-size:8.3pt}
+  .steps .who{font-size:8pt}
+
+  /* 表 */
+  .tbl{overflow:visible;margin-top:3mm}
+  table{min-width:0;font-size:8.6pt}
+  th,td{padding:1.8mm 2.5mm}
+  th{font-size:7.8pt}
+
+  .formula{font-size:8.6pt;padding:3mm 4mm;margin-top:3.5mm;max-width:110mm}
+
+  /* 始める順 */
+  .timeline{gap:3.5mm;margin-top:4mm}
+  .phase{padding-top:2.5mm;border-top-width:3px}
+  .phase h3{font-size:10.5pt;margin:.5mm 0 1.2mm}
+  .phase .cond{font-size:7.8pt;margin-bottom:1mm}
+  .phase p{font-size:8.3pt}
+
+  /* やることリスト：紙の上でチェックできるように */
+  .prio{gap:1.8mm;margin-top:3mm}
+  .prio li{grid-template-columns:7mm 1fr;gap:2mm;padding:2.2mm 3mm}
+  .prio li::before{font-size:13pt}
+  .prio b{font-size:9.3pt}
+  .prio span{font-size:8.3pt}
+  .legend{font-size:8pt;margin-top:3mm}
+  #todoGroups{break-inside:auto}
+  #todoGroups::before{display:none}               /* 2枚にまたがるので縫い目の枠は付けない */
+  #todoGroups{border:1px dashed var(--thread)}
+  .group{margin-top:3.5mm;break-inside:avoid}
+  .group:first-child{margin-top:0}
+  .group h3{font-size:11pt}
+  .group h3 .count{font-size:7.5pt}
+  .todo{margin-top:1mm}
+  .todo li{break-inside:avoid}
+  .check{grid-template-columns:5.5mm 1fr auto;gap:2mm;padding:1.4mm 1mm;min-height:0}
+  .check input{width:3.6mm;height:3.6mm;margin-top:.6mm}
+  .check .t{font-size:8.8pt}
+  .check .t small{font-size:7.6pt}
+  .check .badges .tag{font-size:6.8pt}
 }
 </style>
 
@@ -334,7 +434,7 @@ td:first-child{font-weight:700;white-space:nowrap}
           <text x="114" y="232" font-weight="700">次のお客に</text>
         </g>
         <!-- お金 -->
-        <g font-size="12" fill="var(--muted)">
+        <g font-size="14" fill="var(--muted)">
           <text x="20" y="22">― 青：回収リメイク（A）　― 茶：リメイク作品（B）　┄ 素材と発信</text>
         </g>
       </svg>
@@ -440,7 +540,7 @@ td:first-child{font-weight:700;white-space:nowrap}
       <span><span class="tag ok">下書き</span> 下書きを作れる・できている</span>
     </div>
     <div class="progress"><span id="progText">0 / 0 済み</span><div class="bar"><i id="progBar"></i></div></div>
-    <p class="foot">チェックはこの端末のブラウザにだけ残ります（ほかの人には見えません）。</p>
+    <p class="foot screen-only">チェックはこの端末のブラウザにだけ残ります（ほかの人には見えません）。</p>
   </div>
 
   <div class="patch" id="todoGroups"></div>

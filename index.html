@@ -31,6 +31,7 @@
   --leather:#D9945E;--leather-soft:#3A2A1E;--thread:#D6B26C;--line:#2E3648;--mid1:#A3AFC5;--mid2:#C2B08A;--ok:#6FCB9F;--ok-soft:#1D3A2E;color-scheme:dark}
 
 *{box-sizing:border-box}
+[hidden]{display:none!important}   /* 単独で開いた時（GitHub Pages・手元のファイル）も、隠した物を確実に隠す */
 body{background:var(--bg);color:var(--ink);font-family:var(--font-body);font-size:16px;line-height:1.75;margin:0}
 .wrap{max-width:1080px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 64px}
 h1,h2,h3{font-family:var(--font-display);text-wrap:balance;margin:0;line-height:1.35}

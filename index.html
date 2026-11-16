@@ -147,11 +147,12 @@ td:first-child{font-weight:700;white-space:nowrap}
 .formula .v{font-family:var(--font-mono);color:var(--muted)}
 
 /* 始める順 */
-.timeline{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-top:24px}
+.timeline{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:16px;margin-top:24px}
 .phase{border-top:4px solid var(--denim);padding-top:14px;min-width:0}
 .phase:nth-child(2){border-top-color:var(--mid1)}
 .phase:nth-child(3){border-top-color:var(--mid2)}
 .phase:nth-child(4){border-top-color:var(--thread)}
+.phase:nth-child(5){border-top-color:var(--leather)}
 .phase .n{font-family:var(--font-mono);font-size:12px;color:var(--muted)}
 .phase h3{font-size:18px;margin:2px 0 8px}
 .phase .cond{font-size:13px;color:var(--leather);font-weight:700;margin-bottom:6px}
@@ -321,7 +322,8 @@ td:first-child{font-weight:700;white-space:nowrap}
   #todoGroups{break-inside:auto}
   #todoGroups::before{display:none}               /* 2枚にまたがるので縫い目の枠は付けない */
   #todoGroups{border:1px dashed var(--thread)}
-  .group{margin-top:3.5mm;break-inside:avoid}
+  .group{margin-top:3.5mm;break-inside:auto}
+  .group h3{break-after:avoid}
   .group:first-child{margin-top:0}
   .group h3{font-size:11pt}
   .group h3 .count{font-size:7.5pt}
@@ -379,12 +381,12 @@ td:first-child{font-weight:700;white-space:nowrap}
         <span class="key">B</span>
         <h3>リメイク作品</h3>
         <p>古着屋での買い付け・個人の回収・提供の枠で集めた古着と、預かった服の残りから作る1点物。</p>
-        <dl><dt>買う人</dt><dd>1点物が欲しい人</dd><dt>売り場</dt><dd>メルカリShops → ヤフオク等／古着屋／イベント</dd></dl>
+        <dl><dt>買う人</dt><dd>1点物が欲しい人</dd><dt>売り場</dt><dd>最初はフリマサイト（メルカリShops 等）・イベント・古着屋 → 軌道に乗ったら順に HP へ。ZOZOTOWN 等にも出店</dd></dl>
       </div>
       <div class="item">
         <span class="key">C</span>
         <h3>自社商品</h3>
-        <p>ポロシャツ・ジャケット・ロゴT など。25〜35歳。</p>
+        <p>A・B の利益で育てる。最初は小ロットで割高でも、素材と品質にこだわる。ポロシャツ・ジャケット・ロゴT など。25〜35歳。</p>
         <dl><dt>買う人</dt><dd>ブランドを好きになった人</dd><dt>売り場</dt><dd>HP の中（SUZURI／BASE・Shopify 等を検討）</dd></dl>
       </div>
     </div>
@@ -608,7 +610,10 @@ td:first-child{font-weight:700;white-space:nowrap}
             <li class="ok">作品ID・素材・担当・値段・出品先を1枚の表で管理する</li>
             <li class="todo">台帳を作る（スプレッドシート）</li></ul></div></li>
           <li><div><b>売る</b><span class="who">運営</span><ul class="it">
-            <li class="ok">まずメルカリShops とイベント。その後ヤフオク等も</li>
+            <li class="ok">最初はフリマサイト（メルカリShops 等）とイベントで知ってもらい、軌道に乗ったら順に HP へ。ZOZOTOWN 等にも出店</li>
+            <li class="ok">ほかのブランドのロゴ・タグ・ワッペンは残さず、説明にもブランド名を書かない</li>
+            <li class="todo">「軌道に乗った」の物差し／ZOZOTOWN 等に何をいつ出すか</li>
+            <li class="todo">ロゴのルールを弁理士か弁護士に確かめる</li>
             <li class="ok">売れたら、ほかの出品先から下げる</li>
             <li class="todo">値段の決め方</li>
             <li class="todo">誰が梱包・発送するか</li></ul></div></li>
@@ -628,10 +633,8 @@ td:first-child{font-weight:700;white-space:nowrap}
           <li><div><b>入る：B</b><span class="who">買った人 → 運営</span><ul class="it">
             <li class="ok">販売価格から、メルカリShops の手数料10%を引いた額</li>
             <li class="todo">値段の決め方</li></ul></div></li>
-          <li><div><b>出る：報酬</b><span class="who">運営 → 制作者</span><ul class="it">
-            <li class="todo">A・B の額と支払日</li></ul></div></li>
-          <li><div><b>出る：買い付け</b><span class="who">運営 → 古着屋</span><ul class="it">
-            <li class="todo">予算</li></ul></div></li>
+          <li><div><b>出る</b><span class="who">運営 → 制作者・古着屋</span><ul class="it">
+            <li class="todo">報酬（A・B の額と支払日）／買い付けの予算</li></ul></div></li>
         </ol>
       </section>
     </div>
@@ -644,7 +647,7 @@ td:first-child{font-weight:700;white-space:nowrap}
     <div class="stages">
       <div class="stage"><span class="n mono">1</span><h3>知る</h3><span class="chip">TikTok</span><span class="chip">YouTube</span><span class="chip">メルカリShops</span><span class="chip">イベント</span><p>制作過程の縦の動画、1点物の出品で、うちを知らない人に届く</p></div>
       <div class="stage"><span class="n mono">2</span><h3>信じる</h3><span class="chip">Instagram</span><span class="chip hub">HP（ハブ）</span><p>作品のビフォー・アフター、つくり手、料金がはっきり見える</p></div>
-      <div class="stage"><span class="n mono">3</span><h3>頼む・買う</h3><span class="chip hub">公式LINE</span><span class="chip">HP（自社商品）</span><p>回収リメイクは LINE で相談・申し込み。自社商品は HP で購入</p></div>
+      <div class="stage"><span class="n mono">3</span><h3>頼む・買う</h3><span class="chip hub">公式LINE</span><span class="chip">HP</span><span class="chip">フリマサイト</span><p>回収リメイクは LINE で相談・申し込み。自社商品は HP で購入。作品は最初フリマサイトで、軌道に乗ったら HP へ</p></div>
       <div class="stage"><span class="n mono">4</span><h3>また頼む</h3><span class="chip hub">公式LINE</span><p>シーズンの受付のお知らせ、スタンプカード。完成作品が次の人の「信じる」になる</p></div>
     </div>
   </div>
@@ -686,7 +689,7 @@ td:first-child{font-weight:700;white-space:nowrap}
       <thead><tr><th>売る物</th><th>入るお金</th><th>出ていくお金</th><th>制作者への払い方（案）</th></tr></thead>
       <tbody>
         <tr><td>A 回収リメイク</td><td>料金：1着4,000〜6,000円 <span class="tag kari">仮</span></td><td>報酬・材料・送料（行き帰り）・決済の手数料</td><td>1着いくらの出来高</td></tr>
-        <tr><td>B リメイク作品</td><td>販売価格 − 手数料10%（メルカリShops）− 送料</td><td>報酬・送料・買い付けの代金（回収・提供の服はほぼ0円）</td><td>売れたら売上の何割</td></tr>
+        <tr><td>B リメイク作品</td><td>販売価格 − 手数料（メルカリShops は10%。HP に移すと決済の手数料だけ）− 送料</td><td>報酬・送料・買い付けの代金（回収・提供の服はほぼ0円）</td><td>売れたら売上の何割</td></tr>
         <tr><td>C 自社商品</td><td>販売価格 − 決済の手数料（SUZURI はトリブン）</td><td>生産費（小ロット）・デザイン料・送料</td><td>1型いくら／売上の何割 <span class="tag kari">未定</span></td></tr>
       </tbody>
     </table></div>
@@ -710,7 +713,8 @@ td:first-child{font-weight:700;white-space:nowrap}
       <div class="phase"><span class="n mono">段階 1</span><h3>LINE・Instagram・縦の動画</h3><p class="cond">すぐ（作品は数点でよい）</p><p>同じ縦の動画を TikTok・リール・ショートの3か所に</p></div>
       <div class="phase"><span class="n mono">段階 2</span><h3>HP</h3><p class="cond">料金・期間・送り方が決まったら</p><p>中身の芯は料金としくみ</p></div>
       <div class="phase"><span class="n mono">段階 3</span><h3>メルカリShops・イベント</h3><p class="cond">作品が10点ほどたまったら</p><p>1点物は作品台帳で管理</p></div>
-      <div class="phase"><span class="n mono">段階 4</span><h3>ヤフオク等・長い動画・自社商品</h3><p class="cond">メルカリShops が回り出したら</p><p>同時出品は台帳 → 増えたら一元管理のツール</p></div>
+      <div class="phase"><span class="n mono">段階 4</span><h3>ほかのフリマサイト・長い動画・自社商品</h3><p class="cond">メルカリShops が回り出したら</p><p>同時出品は台帳 → 増えたら一元管理のツール</p></div>
+      <div class="phase"><span class="n mono">段階 5</span><h3>HP での販売・ZOZOTOWN 等</h3><p class="cond">軌道に乗ったと確かめられたら</p><p>作品の販売を順に HP へ移す。ZOZOTOWN 等にも出店</p></div>
     </div>
   </div>
 </section>
@@ -766,6 +770,7 @@ const TODO = [
     {id:"a2", t:"Instagram・TikTok・YouTube・LINE 公式・メルカリShops の名前を同じ名前で押さえる", who:["1人"]},
     {id:"a3", t:"古物商の許可（古着屋での買い付けの前。審査に約40日）", who:["1人"]},
     {id:"a4", t:"プライバシーポリシー・特定商取引法の表記", who:["下書き"]},
+    {id:"a5", t:"作品（B）のロゴのルールを弁理士か弁護士に確かめる", s:"ロゴ・タグ・ワッペンを外せば売ってよいか。出品の前に", who:["1人"]},
   ]},
   {g:"仕組み", items:[
     {id:"s1", t:"作品台帳（作品ID・状態・出品先・値段・素材・担当）", who:["下書き"]},

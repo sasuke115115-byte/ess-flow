@@ -205,11 +205,12 @@ td:first-child{font-weight:700;white-space:nowrap}
 /* ===== A4 の印刷 =====
    紙の割り付け（.pb の所で改ページ）
      1枚目：表紙・売る物3つ・しくみ
-     2枚目：人・服・お金の流れ（A・B の2列）
-     3枚目：媒体の役割・申し込みの流れ
-     4枚目：役割・収益の枠組み
-     5枚目：始める順・やることリストの始め
-     6枚目〜：やることリストの続き（チェック欄つき）
+     2枚目：お客の目線の流れ（図）
+     3枚目：人・服・お金の流れ（A・B の2列・事項ごとに色分け）
+     4枚目：媒体の役割・申し込みの流れ
+     5枚目：役割・収益の枠組み
+     6枚目：始める順・やることリストの始め
+     7枚目〜：やることリストの続き（チェック欄つき）
    文字は pt、余白は mm で決める。画面の見た目は変えない */
 @page{size:A4;margin:12mm 12mm 14mm;
   @bottom-left{content:"East Side Story 事業フロー";font:7.5pt "Zen Kaku Gothic New",sans-serif;color:#5A6275}
@@ -404,6 +405,134 @@ td:first-child{font-weight:700;white-space:nowrap}
       <div><b>お客にとって</b><p class="note" style="color:var(--muted);font-size:15px">服が減り、しかも新しい服が手に入る。シーズンごとに頼める。</p></div>
       <div class="b"><b>残りの服</b><p style="color:var(--muted);font-size:15px">無償で譲ってもらい、使える物はリメイク作品（B）の材料にする。了承は申し込みの時にもらう。</p></div>
     </div>
+  </div>
+
+  <div class="patch pb journey-patch">
+    <p class="eyebrow">Customer journey</p>
+    <h2>お客の目線の流れ</h2>
+    <p class="lead">上の段がお客の見る流れ。服を預けてから作品が届くまでの間に、会社の中で割り振り・リメイク・撮影・確かめが進む。集めた古着の作品は売り場に並び、タグの QR から新しいお客を連れてくる。</p>
+    <div class="flowmap" role="img" aria-label="お客が SNS で知り、公式LINE で相談し、見積もり・申し込みをして服を預ける。会社の中で運営が割り振り、制作者がリメイクと撮影をし、確かめて返す。お客は作品を受け取り、また頼む。撮った素材は運営が編集して投稿し、次の人が知るきっかけになる。集めた古着と預かった服の残りは作品になり、メルカリShops やイベントで売れ、タグの QR から公式LINE につながる図">
+      <svg viewBox="0 0 1000 560" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="jD" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--denim)"/></marker>
+          <marker id="jI" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--ink)"/></marker>
+          <marker id="jL" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--leather)"/></marker>
+          <marker id="jT" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--thread)"/></marker>
+        </defs>
+
+        <!-- 段の見出し -->
+        <g font-size="13" font-weight="700">
+          <text x="20" y="26" fill="var(--denim)">お客の目線</text>
+          <text x="350" y="314" fill="var(--ink)">会社の中（A：預かってリメイク）</text>
+          <text x="20" y="446" fill="var(--leather)">作品を売る流れ（B）</text>
+        </g>
+
+        <!-- お客の段 -->
+        <g font-size="15">
+          <rect x="20"  y="38" width="135" height="76" rx="6" fill="var(--denim-soft)" stroke="var(--denim)" stroke-width="2"/>
+          <text x="87"  y="70" text-anchor="middle" fill="var(--ink)" font-weight="700">1 知る</text>
+          <text x="87"  y="94" text-anchor="middle" fill="var(--muted)" font-size="12">SNS・メルカリShops</text>
+
+          <rect x="185" y="38" width="135" height="76" rx="6" fill="var(--denim-soft)" stroke="var(--denim)" stroke-width="2"/>
+          <text x="252" y="70" text-anchor="middle" fill="var(--ink)" font-weight="700">2 LINEで相談</text>
+          <text x="252" y="94" text-anchor="middle" fill="var(--muted)" font-size="12">服の写真を送る</text>
+
+          <rect x="350" y="38" width="135" height="76" rx="6" fill="var(--denim-soft)" stroke="var(--denim)" stroke-width="2"/>
+          <text x="417" y="70" text-anchor="middle" fill="var(--ink)" font-weight="700">3 見積もり</text>
+          <text x="417" y="94" text-anchor="middle" fill="var(--muted)" font-size="12">申し込み・写真の許可</text>
+
+          <rect x="515" y="38" width="135" height="76" rx="6" fill="var(--denim-soft)" stroke="var(--denim)" stroke-width="2"/>
+          <text x="582" y="70" text-anchor="middle" fill="var(--ink)" font-weight="700">4 服を預ける</text>
+          <text x="582" y="94" text-anchor="middle" fill="var(--muted)" font-size="12">送る・手渡し</text>
+
+          <rect x="680" y="38" width="135" height="76" rx="6" fill="var(--denim-soft)" stroke="var(--denim)" stroke-width="2"/>
+          <text x="747" y="70" text-anchor="middle" fill="var(--ink)" font-weight="700">5 作品が届く</text>
+          <text x="747" y="94" text-anchor="middle" fill="var(--muted)" font-size="12">約半分の点数に</text>
+
+          <rect x="845" y="38" width="135" height="76" rx="6" fill="var(--denim-soft)" stroke="var(--denim)" stroke-width="2"/>
+          <text x="912" y="70" text-anchor="middle" fill="var(--ink)" font-weight="700">6 また頼む</text>
+          <text x="912" y="94" text-anchor="middle" fill="var(--muted)" font-size="12">次のシーズン</text>
+        </g>
+        <g stroke="var(--denim)" stroke-width="2" fill="none">
+          <path d="M155 76 H181" marker-end="url(#jD)"/>
+          <path d="M320 76 H346" marker-end="url(#jD)"/>
+          <path d="M485 76 H511" marker-end="url(#jD)"/>
+          <path d="M815 76 H841" marker-end="url(#jD)"/>
+        </g>
+
+        <!-- 会社の中の段 -->
+        <g font-size="15">
+          <rect x="350" y="216" width="135" height="76" rx="6" fill="var(--paper)" stroke="var(--ink)" stroke-width="2"/>
+          <text x="417" y="248" text-anchor="middle" fill="var(--ink)" font-weight="700">割り振る</text>
+          <text x="417" y="272" text-anchor="middle" fill="var(--muted)" font-size="12">運営の担当者</text>
+
+          <rect x="515" y="216" width="135" height="76" rx="6" fill="var(--paper)" stroke="var(--ink)" stroke-width="2"/>
+          <text x="582" y="248" text-anchor="middle" fill="var(--ink)" font-weight="700">リメイク</text>
+          <text x="582" y="272" text-anchor="middle" fill="var(--muted)" font-size="12">制作者・各自の作業場</text>
+
+          <rect x="680" y="216" width="135" height="76" rx="6" fill="var(--paper)" stroke="var(--ink)" stroke-width="2" stroke-dasharray="6 4"/>
+          <text x="747" y="248" text-anchor="middle" fill="var(--ink)" font-weight="700">撮影・素材</text>
+          <text x="747" y="272" text-anchor="middle" fill="var(--muted)" font-size="12">許可がある時だけ</text>
+
+          <rect x="845" y="216" width="135" height="76" rx="6" fill="var(--paper)" stroke="var(--ink)" stroke-width="2"/>
+          <text x="912" y="248" text-anchor="middle" fill="var(--ink)" font-weight="700">確かめて返す</text>
+          <text x="912" y="272" text-anchor="middle" fill="var(--muted)" font-size="12">誰がするかは未定</text>
+
+          <rect x="680" y="332" width="135" height="64" rx="6" fill="var(--paper)" stroke="var(--thread)" stroke-width="2"/>
+          <text x="747" y="358" text-anchor="middle" fill="var(--ink)" font-weight="700">編集・投稿</text>
+          <text x="747" y="380" text-anchor="middle" fill="var(--muted)" font-size="12">運営：SNS・HP へ</text>
+        </g>
+        <g stroke="var(--ink)" stroke-width="2" fill="none">
+          <path d="M582 114 C582 170 417 160 417 212" marker-end="url(#jI)"/>
+          <path d="M485 254 H511" marker-end="url(#jI)"/>
+          <path d="M650 254 H676" marker-end="url(#jI)"/>
+          <path d="M815 254 H841" marker-end="url(#jI)"/>
+          <path d="M912 216 C912 160 747 170 747 118" marker-end="url(#jI)"/>
+        </g>
+        <!-- 素材 → 投稿 → 次の人が知る -->
+        <g stroke="var(--thread)" stroke-width="2" fill="none" stroke-dasharray="6 4">
+          <path d="M747 292 V328" marker-end="url(#jT)"/>
+          <path d="M680 364 H87 V118" marker-end="url(#jT)"/>
+        </g>
+        <text x="300" y="356" font-size="12" fill="var(--muted)" font-weight="700">次の人の「知る」になる</text>
+
+        <!-- B の段 -->
+        <g font-size="15">
+          <rect x="20"  y="458" width="135" height="76" rx="6" fill="var(--leather-soft)" stroke="var(--leather)" stroke-width="2"/>
+          <text x="87"  y="490" text-anchor="middle" fill="var(--ink)" font-weight="700">古着を集める</text>
+          <text x="87"  y="514" text-anchor="middle" fill="var(--muted)" font-size="12">買い付け・回収・提供</text>
+
+          <rect x="350" y="458" width="135" height="76" rx="6" fill="var(--leather-soft)" stroke="var(--leather)" stroke-width="2"/>
+          <text x="417" y="490" text-anchor="middle" fill="var(--ink)" font-weight="700">作品にする</text>
+          <text x="417" y="514" text-anchor="middle" fill="var(--muted)" font-size="12">制作者・1点物</text>
+
+          <rect x="515" y="458" width="135" height="76" rx="6" fill="var(--leather-soft)" stroke="var(--leather)" stroke-width="2"/>
+          <text x="582" y="490" text-anchor="middle" fill="var(--ink)" font-weight="700">撮影・台帳</text>
+          <text x="582" y="514" text-anchor="middle" fill="var(--muted)" font-size="12">運営</text>
+
+          <rect x="680" y="458" width="135" height="76" rx="6" fill="var(--leather-soft)" stroke="var(--leather)" stroke-width="2"/>
+          <text x="747" y="490" text-anchor="middle" fill="var(--ink)" font-weight="700">売る</text>
+          <text x="747" y="514" text-anchor="middle" fill="var(--muted)" font-size="12">メルカリShops 等</text>
+
+          <rect x="845" y="458" width="135" height="76" rx="6" fill="var(--leather-soft)" stroke="var(--leather)" stroke-width="2"/>
+          <text x="912" y="490" text-anchor="middle" fill="var(--ink)" font-weight="700">買った人に届く</text>
+          <text x="912" y="514" text-anchor="middle" fill="var(--muted)" font-size="12">タグに公式LINEのQR</text>
+        </g>
+        <g stroke="var(--leather)" stroke-width="2" fill="none">
+          <path d="M155 496 H346" marker-end="url(#jL)"/>
+          <path d="M485 496 H511" marker-end="url(#jL)"/>
+          <path d="M650 496 H676" marker-end="url(#jL)"/>
+          <path d="M815 496 H841" marker-end="url(#jL)"/>
+          <path d="M582 292 C582 380 417 400 417 454" marker-end="url(#jL)" stroke-dasharray="6 4"/>
+          <path d="M912 458 V420 H252 V118" marker-end="url(#jL)"/>
+        </g>
+        <g font-size="12" fill="var(--leather)" font-weight="700">
+          <text x="592" y="322">残りの使える服</text>
+          <text x="262" y="412">タグの QR から LINE へ</text>
+        </g>
+      </svg>
+    </div>
+    <p class="foot">それぞれの段で何が決まっていて、何をこれから決めるかは、次の「人・服・お金の流れ」に色分けして並べている。</p>
   </div>
 
   <div class="patch pb lanes-patch">

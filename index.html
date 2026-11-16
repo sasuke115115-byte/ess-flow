@@ -19,17 +19,17 @@
   --line:#D3D8E1;
   --mid1:#5A6A86; --mid2:#91866A;   /* 始める順の帯：デニムから糸の色へ */
   --ok:#2E7D5B; --ok-soft:#DDEFE6;
-  --todo:#C9650F; --todo-soft:#FCEBD8; --todo-ink:#A04E06;   /* これから決めること */
+  --todo:#C9650F; --todo-soft:#FCEBD8; --todo-ink:#A04E06; --ok-ink:#215C42;   /* これから決めること */
   --font-display:"Shippori Mincho B1","Hiragino Mincho ProN","Yu Mincho",serif;
   --font-body:"Zen Kaku Gothic New","Hiragino Sans","Yu Gothic",system-ui,sans-serif;
   --font-mono:"DM Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
   --bg:#121621;--paper:#1B2130;--ink:#E7EAF1;--muted:#A3AABB;--denim:#8FAEE3;--denim-soft:#26324A;
-  --leather:#D9945E;--leather-soft:#3A2A1E;--thread:#D6B26C;--line:#2E3648;--mid1:#A3AFC5;--mid2:#C2B08A;--ok:#6FCB9F;--ok-soft:#1D3A2E;--todo:#F0A35E;--todo-soft:#3A2814;--todo-ink:#F5B87C;color-scheme:dark}}
+  --leather:#D9945E;--leather-soft:#3A2A1E;--thread:#D6B26C;--line:#2E3648;--mid1:#A3AFC5;--mid2:#C2B08A;--ok:#6FCB9F;--ok-soft:#1D3A2E;--todo:#F0A35E;--todo-soft:#3A2814;--todo-ink:#F5B87C;--ok-ink:#A6E3C3;color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#121621;--paper:#1B2130;--ink:#E7EAF1;--muted:#A3AABB;--denim:#8FAEE3;--denim-soft:#26324A;
-  --leather:#D9945E;--leather-soft:#3A2A1E;--thread:#D6B26C;--line:#2E3648;--mid1:#A3AFC5;--mid2:#C2B08A;--ok:#6FCB9F;--ok-soft:#1D3A2E;--todo:#F0A35E;--todo-soft:#3A2814;--todo-ink:#F5B87C;color-scheme:dark}
+  --leather:#D9945E;--leather-soft:#3A2A1E;--thread:#D6B26C;--line:#2E3648;--mid1:#A3AFC5;--mid2:#C2B08A;--ok:#6FCB9F;--ok-soft:#1D3A2E;--todo:#F0A35E;--todo-soft:#3A2814;--todo-ink:#F5B87C;--ok-ink:#A6E3C3;color-scheme:dark}
 
 *{box-sizing:border-box}
 [hidden]{display:none!important}   /* 単独で開いた時（GitHub Pages・手元のファイル）も、隠した物を確実に隠す */
@@ -93,33 +93,28 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .flowmap svg{display:block;min-width:760px;width:100%;height:auto}
 .flowmap text{font-family:var(--font-body)}
 
-/* 人・服・お金の流れ：決まっている＝緑／これから決める＝オレンジ */
+/* 人・服・お金の流れ：段は色を付けず、中の事項ごとに 決まっている＝緑／これから決める＝オレンジ */
 .st-legend{display:flex;flex-wrap:wrap;gap:6px 20px;margin-top:16px;font-size:14px;color:var(--muted);align-items:center}
 .st-legend span{display:inline-flex;align-items:center;gap:8px}
 .sw{display:inline-block;width:18px;height:18px;border-radius:4px}
 .sw.ok{background:var(--ok)}
 .sw.todo{background:var(--todo)}
-.lanes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin-top:20px}
+.lanes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;margin-top:20px}
 .lane{min-width:0}
-.lane-h{font-size:19px;display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 10px;padding-bottom:10px;border-bottom:2px solid var(--ink);margin-bottom:10px}
+.lane-h{font-size:19px;display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 10px;padding-bottom:10px;border-bottom:2px solid var(--ink);margin-bottom:4px}
 .lane-h .mono{font-size:15px;background:var(--ink);color:var(--paper);border-radius:4px;padding:0 8px;font-family:var(--font-mono)}
 .lane-h small{font-family:var(--font-body);font-size:13px;font-weight:500;color:var(--muted)}
-.fl{list-style:none;margin:0;padding:0;counter-reset:f;display:grid;gap:8px}
-.fl li{display:grid;grid-template-columns:30px 1fr;gap:10px;padding:10px 12px;border-radius:6px;border-left:5px solid var(--ok);background:var(--ok-soft)}
-.fl li.todo{border-left-color:var(--todo);background:var(--todo-soft)}
-.fl li::before{counter-increment:f;content:counter(f);font-family:var(--font-mono);font-weight:500;font-size:13px;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:var(--ok);color:#fff}
-.fl li.todo::before{background:var(--todo)}
+.fl{list-style:none;margin:0;padding:0;counter-reset:f}
+.fl > li{display:grid;grid-template-columns:30px 1fr;gap:10px;padding:10px 0;border-bottom:1px dashed var(--line)}
+.fl > li::before{counter-increment:f;content:counter(f);font-family:var(--font-mono);font-weight:500;font-size:13px;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;border:1.5px solid var(--ink);color:var(--ink)}
+.fl.money > li{grid-template-columns:1fr}
+.fl.money > li::before{display:none}
 .fl b{font-size:16px;margin-right:8px}
-.fl .who{display:inline-block;font-size:12px;font-weight:700;padding:1px 8px;border-radius:999px;background:var(--paper);color:var(--ink);border:1px solid var(--line);vertical-align:2px}
-.fl p{font-size:14px;color:var(--ink);margin-top:3px}
-.dec{color:var(--todo-ink)!important;font-weight:700;font-size:13px}
-.fl p.dec::before,.money .dec::before{content:"";display:inline-block;width:8px;height:8px;border-radius:2px;background:var(--todo);margin-right:6px;vertical-align:1px}
-.money-h{font-size:19px;margin:26px 0 10px}
-.money{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr;gap:8px}
-.money li{padding:10px 12px;border-radius:6px;border-left:5px solid var(--ok);background:var(--ok-soft);font-size:14px;display:flex;flex-direction:column;gap:2px}
-.money li.todo{border-left-color:var(--todo);background:var(--todo-soft)}
-.money li b{font-family:var(--font-mono);font-size:12px;color:var(--muted)}
-.money .dec{font-size:13px}
+.fl .who{display:inline-block;font-size:12px;font-weight:700;padding:1px 8px;border-radius:999px;background:var(--bg);color:var(--muted);vertical-align:2px}
+.it{list-style:none;margin:6px 0 0;padding:0;display:grid;gap:4px}
+.it li{font-size:14px;line-height:1.5;padding:4px 10px;border-radius:4px;border-left:4px solid var(--ok);background:var(--ok-soft);color:var(--ok-ink)}
+.it li.todo{border-left-color:var(--todo);background:var(--todo-soft);color:var(--todo-ink);font-weight:700}
+.money-h{font-size:19px;margin:26px 0 4px;padding-bottom:10px;border-bottom:2px solid var(--ink)}
 
 /* 段階（知る→信じる→頼む→また） */
 .stages{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;margin-top:24px;border:1px solid var(--line);border-radius:4px;overflow:hidden}
@@ -224,7 +219,7 @@ td:first-child{font-weight:700;white-space:nowrap}
   :root,:root:not([data-theme="light"]),:root[data-theme="dark"]{
     --bg:#F3F4F6;--paper:#fff;--ink:#1B2233;--muted:#4F5768;--denim:#2F4A7A;--denim-soft:#E2E8F2;
     --leather:#9A5B2C;--leather-soft:#F3E7DC;--thread:#C9A15A;--line:#CDD3DD;--mid1:#5A6A86;--mid2:#91866A;
-    --ok:#2E7D5B;--ok-soft:#E0F0E7;--todo:#C9650F;--todo-soft:#FCEBD8;--todo-ink:#A04E06;color-scheme:light}
+    --ok:#2E7D5B;--ok-soft:#E0F0E7;--todo:#C9650F;--todo-soft:#FCEBD8;--todo-ink:#A04E06;--ok-ink:#215C42;color-scheme:light}
   *{-webkit-print-color-adjust:exact;print-color-adjust:exact}   /* 表紙の色・印を紙にも出す */
   html,body{background:#fff}
   body{font-size:9.5pt;line-height:1.55}
@@ -274,21 +269,16 @@ td:first-child{font-weight:700;white-space:nowrap}
   .st-legend{font-size:8pt;margin-top:2mm;gap:1mm 6mm}
   .sw{width:3.2mm;height:3.2mm;border-radius:.8mm}
   .lanes{gap:5mm;margin-top:2.5mm}
-  .lane-h{font-size:10.5pt;padding-bottom:1.4mm;margin-bottom:2mm;border-bottom-width:1.2px}
+  .lane-h{font-size:10.5pt;padding-bottom:1.4mm;margin-bottom:.5mm;border-bottom-width:1.2px}
   .lane-h .mono{font-size:8.5pt;padding:0 1.6mm}
   .lane-h small{font-size:7.5pt}
-  .fl{gap:.9mm}
-  .fl li{grid-template-columns:5mm 1fr;gap:2mm;padding:1mm 2.2mm;border-left-width:1.2mm;break-inside:avoid}
-  .fl li::before{width:4.6mm;height:4.6mm;font-size:7pt}
-  .fl b{font-size:9pt;margin-right:1.5mm}
+  .fl > li{grid-template-columns:5mm 1fr;gap:2mm;padding:.7mm 0;break-inside:avoid}
+  .fl > li::before{width:4.4mm;height:4.4mm;font-size:7pt;border-width:1px}
+  .fl b{font-size:8.6pt;margin-right:1.5mm}
   .fl .who{font-size:6.8pt;padding:0 1.6mm}
-  .fl p{font-size:7.5pt;margin-top:.2mm;line-height:1.35}
-  .dec{font-size:7.6pt!important}
-  .fl p.dec::before,.money .dec::before{width:1.6mm;height:1.6mm;margin-right:1.2mm}
-  .money-h{font-size:10.5pt;margin:4mm 0 2mm;padding-bottom:1.4mm;border-bottom:1.2px solid var(--ink)}
-  .money{gap:1.6mm}
-  .money li{padding:1.6mm 2.4mm;border-left-width:1.2mm;font-size:8.3pt;gap:.3mm}
-  .money li b{font-size:7pt}
+  .it{margin-top:.3mm;gap:.35mm}
+  .it li{font-size:7.2pt;line-height:1.3;padding:.25mm 1.8mm;border-left-width:1mm}
+  .money-h{font-size:10.5pt;margin:3.5mm 0 .5mm;padding-bottom:1.4mm;border-bottom-width:1.2px}
 
   /* 媒体の役割 */
   .stages{margin-top:4mm}
@@ -387,7 +377,7 @@ td:first-child{font-weight:700;white-space:nowrap}
       <div class="item">
         <span class="key">B</span>
         <h3>リメイク作品</h3>
-        <p>古着屋での買い付け・個人の回収・提供の枠で集めた古着から作る1点物。</p>
+        <p>古着屋での買い付け・個人の回収・提供の枠で集めた古着と、預かった服の残りから作る1点物。</p>
         <dl><dt>買う人</dt><dd>1点物が欲しい人</dd><dt>売り場</dt><dd>メルカリShops → ヤフオク等／古着屋／イベント</dd></dl>
       </div>
       <div class="item">
@@ -412,7 +402,7 @@ td:first-child{font-weight:700;white-space:nowrap}
     </div>
     <div class="split">
       <div><b>お客にとって</b><p class="note" style="color:var(--muted);font-size:15px">服が減り、しかも新しい服が手に入る。シーズンごとに頼める。</p></div>
-      <div class="b"><b>残りの服</b><p style="color:var(--muted);font-size:15px">無償で譲ってもらい、制作の材料に回す。了承は申し込みの時にもらう。</p></div>
+      <div class="b"><b>残りの服</b><p style="color:var(--muted);font-size:15px">無償で譲ってもらい、使える物はリメイク作品（B）の材料にする。了承は申し込みの時にもらう。</p></div>
     </div>
   </div>
 
@@ -422,76 +412,100 @@ td:first-child{font-weight:700;white-space:nowrap}
     <p class="lead">流れは2本。A はお客の服を預かってリメイクして返す流れ、B は集めた古着を作品にして売る流れ。B で作品を買った人が、タグの QR から A のお客になる。</p>
     <div class="st-legend" aria-label="色の見方">
       <span><i class="sw ok"></i>決まっていること</span>
-      <span><i class="sw todo"></i>これから決めること</span><span>緑の段の中のオレンジの行は、細かい所でまだ決めること</span>
+      <span><i class="sw todo"></i>これから決めること</span>
     </div>
     <div class="lanes">
       <section class="lane" aria-label="A 預かってリメイクして返す">
         <h3 class="lane-h"><span class="mono">A</span>預かってリメイクして返す<small>回収リメイク・柱</small></h3>
         <ol class="fl">
-          <li class="ok"><div><b>知る</b><span class="who">お客</span>
-            <p>YouTube・Instagram・TikTok・メルカリShops で、うちを知る。服を預けたいと思う</p></div></li>
-          <li class="ok"><div><b>公式LINE へ</b><span class="who">お客</span>
-            <p>SNS から公式LINE に誘う。メルカリShops の作品を買った人は、タグの QR から（B-7）</p>
-            <p class="dec">決める：LINE のあいさつ・自動の返事・下のメニューの文</p></div></li>
-          <li class="ok"><div><b>相談・見積もり</b><span class="who">お客・運営</span>
-            <p>服の写真を送ってもらい、何着 → 何点に、いくらかを出す。<strong>写真・動画を作品として載せてよいか</strong>、ここで許可をもらう</p>
-            <p class="dec">決める：料金（5着で2〜3万円は仮）</p></div></li>
-          <li class="todo"><div><b>申し込み・支払い</b><span class="who">お客・運営</span>
-            <p>同意の文に「申し込みます」と返してもらって決まり（文は下書きあり）</p>
-            <p class="dec">決める：支払いの受け方（振込・カード・PayPay 等）／先払いか／キャンセルの決まりの数字</p></div></li>
-          <li class="todo"><div><b>服を預かる</b><span class="who">お客 → ？</span>
-            <p class="dec">決める：運営に集めるか、制作者へ直接か／送料をどちらが持つか</p></div></li>
-          <li class="ok"><div><b>制作者に割り振る</b><span class="who">運営の担当者</span>
-            <p>見積もりの中身から、得意な素材・空いている制作者に頼む。依頼のメモで条件を示す</p></div></li>
-          <li class="ok"><div><b>リメイク</b><span class="who">制作者</span>
-            <p>各自の作業場で、預かった点数のおよそ半分の作品に。残りの服は材料に回す</p></div></li>
-          <li class="ok"><div><b>撮影・素材を送る</b><span class="who">制作者 → 運営</span>
-            <p>許可がある時だけ、撮り方の指定のとおりに写真・動画を撮って運営に送る</p>
-            <p class="dec">決める：素材の受け取り場所（制作者ごとのフォルダ）</p></div></li>
-          <li class="todo"><div><b>確かめてお客に返す</b><span class="who">？ → お客</span>
-            <p class="dec">決める：返す前に誰が確かめるか／返し方（郵送・手渡し）</p></div></li>
-          <li class="ok"><div><b>編集・投稿</b><span class="who">運営</span>
-            <p>素材を編集して SNS・HP に出す。これが次の人の「知る」になる（A-1 へ）</p></div></li>
-          <li class="todo"><div><b>報酬を払う</b><span class="who">運営 → 制作者</span>
-            <p class="dec">決める：額（案は1着いくらの出来高）／支払日</p></div></li>
-          <li class="ok"><div><b>また頼む</b><span class="who">お客</span>
-            <p>次のシーズンの受付を LINE で知らせる</p></div></li>
+          <li><div><b>知る</b><span class="who">お客</span><ul class="it">
+            <li class="ok">YouTube・Instagram・TikTok・メルカリShops で知り、服を預けたいと思う</li></ul></div></li>
+          <li><div><b>公式LINE へ</b><span class="who">お客</span><ul class="it">
+            <li class="ok">SNS から公式LINE に誘う</li>
+            <li class="ok">メルカリShops で作品を買った人は、タグの QR から（B-7）</li>
+            <li class="todo">LINE のあいさつ・自動の返事・下のメニューの文</li></ul></div></li>
+          <li><div><b>相談・見積もり</b><span class="who">お客・運営</span><ul class="it">
+            <li class="ok">服の写真から、何着 → 何点に、いくらかを出す</li>
+            <li class="ok">写真・動画を作品として載せてよいかの許可を、ここでもらう</li>
+            <li class="todo">料金（5着で2〜3万円は仮）</li></ul></div></li>
+          <li><div><b>申し込み・支払い</b><span class="who">お客・運営</span><ul class="it">
+            <li class="ok">同意の文に「申し込みます」と返してもらって決まり</li>
+            <li class="todo">同意の文の中身（下書きあり・数字が空）</li>
+            <li class="todo">支払いの受け方（振込・カード・PayPay 等）／先払いか</li>
+            <li class="todo">キャンセルの決まりの数字</li></ul></div></li>
+          <li><div><b>服を預かる</b><span class="who">お客 → ？</span><ul class="it">
+            <li class="todo">運営に集めるか、制作者へ直接か</li>
+            <li class="todo">送料をどちらが持つか</li></ul></div></li>
+          <li><div><b>制作者に割り振る</b><span class="who">運営の担当者</span><ul class="it">
+            <li class="ok">見積もりの中身から、得意な素材・空いている制作者に頼む</li>
+            <li class="todo">依頼のメモ・取り決めの数字（ひな形あり）</li></ul></div></li>
+          <li><div><b>リメイク</b><span class="who">制作者</span><ul class="it">
+            <li class="ok">各自の作業場で、預かった点数のおよそ半分の作品に</li>
+            <li class="ok">残りの服は、使える物を B の作品の材料にする（B-1 へ）</li></ul></div></li>
+          <li><div><b>撮影・素材を送る</b><span class="who">制作者 → 運営</span><ul class="it">
+            <li class="ok">許可がある時だけ、撮り方の指定のとおりに撮って運営に送る</li>
+            <li class="todo">素材の受け取り場所（制作者ごとのフォルダ）</li></ul></div></li>
+          <li><div><b>確かめてお客に返す</b><span class="who">？ → お客</span><ul class="it">
+            <li class="todo">返す前に誰が確かめるか</li>
+            <li class="todo">返し方（郵送・手渡し）</li></ul></div></li>
+          <li><div><b>編集・投稿</b><span class="who">運営</span><ul class="it">
+            <li class="ok">素材を編集して SNS・HP に出す。次の人の「知る」になる（A-1 へ）</li></ul></div></li>
+          <li><div><b>報酬を払う</b><span class="who">運営 → 制作者</span><ul class="it">
+            <li class="todo">額（案は1着いくらの出来高）</li>
+            <li class="todo">支払日</li></ul></div></li>
+          <li><div><b>また頼む</b><span class="who">お客</span><ul class="it">
+            <li class="ok">次のシーズンの受付を LINE で知らせる</li></ul></div></li>
         </ol>
       </section>
 
       <section class="lane" aria-label="B 集めた古着を作品にして売る">
         <h3 class="lane-h"><span class="mono">B</span>集めた古着を作品にして売る<small>リメイク作品・1点物</small></h3>
         <ol class="fl">
-          <li class="ok"><div><b>古着を集める</b><span class="who">運営</span>
-            <p>3つの集め方：古着屋で買い付ける／個人的に回収する／専用の枠を設けて提供してもらう</p>
-            <p class="dec">決める：古物商の許可（買い付けの前に取る。審査に約40日）／回収・提供の枠の形（どこで・どう受け取るか）／買い付けの予算</p></div></li>
-          <li class="ok"><div><b>制作者に割り振る</b><span class="who">運営</span>
-            <p>集めた服を、得意な素材の制作者に渡す</p></div></li>
-          <li class="ok"><div><b>リメイク作品に</b><span class="who">制作者</span>
-            <p>1点物の作品にする</p></div></li>
-          <li class="ok"><div><b>撮影・素材を送る</b><span class="who">制作者 → 運営</span>
-            <p>出品用の写真と、発信用の写真・動画を撮って送る</p></div></li>
-          <li class="ok"><div><b>作品台帳に載せる</b><span class="who">運営</span>
-            <p>作品ID・素材・担当・値段・出品先を1枚の表で管理する</p></div></li>
-          <li class="ok"><div><b>売る</b><span class="who">運営</span>
-            <p>まずメルカリShops とイベント。その後ヤフオク等も。売れたら、ほかの出品先から下げる</p>
-            <p class="dec">決める：値段の決め方／誰が梱包・発送するか</p></div></li>
-          <li class="ok"><div><b>タグに公式LINE の QR</b><span class="who">運営</span>
-            <p>作品のタグに QR を付けて届ける。買った人が A のお客になるかもしれない（A-2 へ）</p>
-            <p class="dec">決める：タグの形（デザイン担当）・誰が付けるか</p></div></li>
-          <li class="todo"><div><b>報酬を払う</b><span class="who">運営 → 制作者</span>
-            <p class="dec">決める：額（案は売れたら売上の何割）／支払日</p></div></li>
+          <li><div><b>古着を集める</b><span class="who">運営</span><ul class="it">
+            <li class="ok">古着屋で買い付ける</li>
+            <li class="ok">個人的に回収する</li>
+            <li class="ok">専用の枠を設けて提供してもらう</li>
+            <li class="ok">A で預かった服の残りのうち、使える物（A-7 から）</li>
+            <li class="todo">古物商の許可（買い付けの前に取る。審査に約40日）</li>
+            <li class="todo">回収・提供の枠の形（どこで・どう受け取るか）</li>
+            <li class="todo">買い付けの予算</li></ul></div></li>
+          <li><div><b>制作者に割り振る</b><span class="who">運営</span><ul class="it">
+            <li class="ok">集めた服を、得意な素材の制作者に渡す</li></ul></div></li>
+          <li><div><b>リメイク作品に</b><span class="who">制作者</span><ul class="it">
+            <li class="ok">1点物の作品にする</li></ul></div></li>
+          <li><div><b>撮影・素材を送る</b><span class="who">制作者 → 運営</span><ul class="it">
+            <li class="ok">出品用と発信用の写真・動画を撮って送る</li></ul></div></li>
+          <li><div><b>作品台帳に載せる</b><span class="who">運営</span><ul class="it">
+            <li class="ok">作品ID・素材・担当・値段・出品先を1枚の表で管理する</li>
+            <li class="todo">台帳を作る（スプレッドシート）</li></ul></div></li>
+          <li><div><b>売る</b><span class="who">運営</span><ul class="it">
+            <li class="ok">まずメルカリShops とイベント。その後ヤフオク等も</li>
+            <li class="ok">売れたら、ほかの出品先から下げる</li>
+            <li class="todo">値段の決め方</li>
+            <li class="todo">誰が梱包・発送するか</li></ul></div></li>
+          <li><div><b>タグに公式LINE の QR</b><span class="who">運営</span><ul class="it">
+            <li class="ok">作品のタグに QR を付けて届ける。買った人が A のお客になるかもしれない（A-2 へ）</li>
+            <li class="todo">タグの形（デザイン担当）・誰が付けるか</li></ul></div></li>
+          <li><div><b>報酬を払う</b><span class="who">運営 → 制作者</span><ul class="it">
+            <li class="todo">額（案は売れたら売上の何割）</li>
+            <li class="todo">支払日</li></ul></div></li>
         </ol>
-      <h3 class="money-h">お金の流れ</h3>
-      <ul class="money">
-        <li class="ok"><b>A</b>お客 → 運営：リメイクの料金<span class="dec">決める：料金・受け方</span></li>
-        <li class="ok"><b>B</b>作品を買った人 → メルカリShops（手数料10%を引く）→ 運営<span class="dec">決める：値段の決め方</span></li>
-        <li class="todo"><b>出る</b>運営 → 制作者：報酬<span class="dec">決める：A・B の額と支払日</span></li>
-        <li class="todo"><b>出る</b>運営 → 古着屋：買い付けの代金<span class="dec">決める：予算</span></li>
-      </ul>
+
+        <h3 class="money-h">お金の流れ</h3>
+        <ol class="fl money">
+          <li><div><b>入る：A</b><span class="who">お客 → 運営</span><ul class="it">
+            <li class="ok">リメイクの料金</li>
+            <li class="todo">料金の額・受け方</li></ul></div></li>
+          <li><div><b>入る：B</b><span class="who">買った人 → 運営</span><ul class="it">
+            <li class="ok">販売価格から、メルカリShops の手数料10%を引いた額</li>
+            <li class="todo">値段の決め方</li></ul></div></li>
+          <li><div><b>出る：報酬</b><span class="who">運営 → 制作者</span><ul class="it">
+            <li class="todo">A・B の額と支払日</li></ul></div></li>
+          <li><div><b>出る：買い付け</b><span class="who">運営 → 古着屋</span><ul class="it">
+            <li class="todo">予算</li></ul></div></li>
+        </ol>
       </section>
     </div>
-
   </div>
 
   <div class="patch">
